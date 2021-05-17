@@ -1,0 +1,1 @@
+define("wkview:widget/ad_smallflow/ad_smallflow.js",function(e,a,t){var l=e("wkcommon:widget/lib/tangram/base/base.js");t.exports={fcTestId:function(){var e,a=l.url.getQueryValue(location.href,"fcTestId"),t=Math.random();return(t>.3&&.4>=t&&!a||90502===+a)&&(e=90502),e}}});

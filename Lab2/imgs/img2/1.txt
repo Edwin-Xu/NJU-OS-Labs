@@ -1,0 +1,335 @@
+12sbdkhksdbk
+sdnjksd ksd 
+1212;
+12
+1
+'12
+1
+12
+121222222
+23
+2343
+434
+35
+45
+4
+
+34
+43
+43
+42
+3
+5d
+fswe
+rer
+
+212
+	//cout << " startClus: " << startClus << endl;
+	//cout << "rootEntry_ptr->DIR_FstClus: " << rootEntry_ptr->DIR_FstClus << endl;
+	int base = BytsPerSec * (RsvdSecCnt + FATSz * NumFATs + (RootEntCnt * 32 + BytsPerSec - 1) / BytsPerSec);
+	base += (512 * (startClus - 2));
+	fseek(fat12, base, SEEK_SET);
+
+	cout << "size: " << size << endl;
+
+	int clusNum = size / 512;
+	int lastClusSize = size % 512;
+
+	char temp[513];
+	fread(temp, 1, size % 512, fat12);
+	temp[size + 1] = '\0';
+	cout << "File content： " << temp << endl;
+
+	cout<<"Next"
+}
+
+int  getFATValue(FILE * fat12, int num) {
+	int type = 0;
+	if (num % 2 == 0) {
+		type = 0;
+	}
+	else {
+		type = 1;
+	}
+
+	u16 bytes;
+	u16* bytes_ptr = &bytes;
+	int check;
+	check = fseek(fat12, fatPos, SEEK_SET);
+	if (check == -1)
+		printf("fseek in getFATValue failed!");
+
+	check = fread(bytes_ptr, 1, 2, fat12);
+	if (check != 2)
+		printf("fread in getFATValue failed!");
+
+
+	if (type == 0) {
+		return bytes << 4;
+	}
+	else {
+		return bytes >> 4;
+	}
+}
+12sbdkhksdbk
+sdnjksd ksd 
+1212;
+12
+1
+'12
+1
+12
+121222222
+23
+2343
+434
+35
+45
+4
+
+34
+43
+43
+42
+3
+5d
+fswe
+rer
+
+212
+	//cout << " startClus: " << startClus << endl;
+	//cout << "rootEntry_ptr->DIR_FstClus: " << rootEntry_ptr->DIR_FstClus << endl;
+	int base = BytsPerSec * (RsvdSecCnt + FATSz * NumFATs + (RootEntCnt * 32 + BytsPerSec - 1) / BytsPerSec);
+	base += (512 * (startClus - 2));
+	fseek(fat12, base, SEEK_SET);
+
+	cout << "size: " << size << endl;
+
+	int clusNum = size / 512;
+	int lastClusSize = size % 512;
+
+	char temp[513];
+	fread(temp, 1, size % 512, fat12);
+	temp[size + 1] = '\0';
+	cout << "File content： " << temp << endl;
+
+	cout<<"Next"
+}
+
+int  getFATValue(FILE * fat12, int num) {
+	int type = 0;
+	if (num % 2 == 0) {
+		type = 0;
+	}
+	else {
+		type = 1;
+	}
+
+	u16 bytes;
+	u16* bytes_ptr = &bytes;
+	int check;
+	check = fseek(fat12, fatPos, SEEK_SET);
+	if (check == -1)
+		printf("fseek in getFATValue failed!");
+
+	check = fread(bytes_ptr, 1, 2, fat12);
+	if (check != 2)
+	12sbdkhksdbk
+sdnjksd ksd 
+1212;
+12
+1
+'12
+1
+12
+121222222
+23
+2343
+434
+35
+45
+4
+
+34
+43
+43
+42
+3
+5d
+fswe
+rer
+
+212
+	//cout << " startClus: " << startClus << endl;
+	//cout << "rootEntry_ptr->DIR_FstClus: " << rootEntry_ptr->DIR_FstClus << endl;
+	int base = BytsPerSec * (RsvdSecCnt + FATSz * NumFATs + (RootEntCnt * 32 + BytsPerSec - 1) / BytsPerSec);
+	base += (512 * (startClus - 2));
+	fseek(fat12, base, SEEK_SET);
+
+	cout << "size: " << size << endl;
+
+	int clusNum = size / 512;
+	int lastClusSize = size % 512;
+
+	char temp[513];
+	fread(temp, 1, size % 512, fat12);
+	temp[size + 1] = '\0';
+	cout << "File content： " << temp << endl;
+
+	cout<<"Next"
+}
+
+int  getFATValue(FILE * fat12, int num) {
+	int type = 0;
+	if (num % 2 == 0) {
+		type = 0;
+	}
+	else {
+		type = 1;
+	}
+
+	u16 bytes;
+	u16* bytes_ptr = &bytes;
+	int check;
+	check = fseek(fat12, fatPos, SEEK_SET);
+	if (check == -1)
+		printf12sbdkhksdbk
+sdnjksd ksd 
+1212;
+12
+1
+'12
+1
+12
+121222222
+23
+2343
+434
+35
+45
+4
+
+34
+43
+43
+42
+3
+5d
+fswe
+rer
+
+212
+	//cout << " startClus: " << startClus << endl;
+	//cout << "rootEntry_ptr->DIR_FstClus: " << rootEntry_ptr->DIR_FstClus << endl;
+	int base = BytsPerSec * (RsvdSecCnt + FATSz * NumFATs + (RootEntCnt * 32 + BytsPerSec - 1) / BytsPerSec);
+	base += (512 * (startClus - 2));
+	fseek(fat12, base, SEEK_SET);
+
+	cout << "size: " << size << endl;
+
+	int clusNum = size / 512;
+	int lastClusSize = size % 512;
+
+	char temp[513];
+	fread(temp, 1, size % 512, fat12);
+	temp[size + 1] = '\0';
+	cout << "File content： " << temp << endl;
+
+	cout<<"Next"
+}
+
+int  getFATValue(FILE * fat12, int num) {
+	int type = 0;
+	if (num % 2 == 0) {
+		type = 0;
+	}
+	else {
+		type = 1;
+	}
+
+	u16 bytes;
+	u16* bytes_ptr = &bytes;
+	int check12sbdkhksdbk
+sdnjksd ksd 
+1212;
+12
+1
+'12
+1
+12
+121222222
+23
+2343
+434
+35
+45
+1212;
+12
+1
+'12
+1
+12
+121222222
+23
+45
+4
+
+34
+	if (num % 2 == 0) {
+		type = 0;
+	}
+	else {
+		type = 1;
+	}
+
+	u16 bytes;
+12sbdkhksdbk
+sdnjksd ksd 
+1212;
+12
+1
+'12
+1
+12
+121222222
+23
+2343
+434
+35
+45
+4
+
+34
+43
+43
+42
+3
+5d
+fswe
+rer
+
+212
+	//cout << " startClus: " << startClus << endl;
+	//cout << "rootEntry_ptr->DIR_FstClus: " << rootEntry_ptr->DIR_FstClus << endl;
+	int base = BytsPerSec * (RsvdSecCnt + FATSz * NumFATs + (RootEntCnt * 32 + BytsPerSec - 1) / BytsPerSec);
+	base += (512 * (startClus - 2));
+	fseek(fat12, base, SEEK_SET);
+
+
+
+	if (type == 0) {
+		return bytes << 4;
+	}
+	else {
+		return bytes >> 4;
+	}
+}	printf("fread in getFATValue failed!");
+
+
+	if (type == 0) {
+		return bytes << 4;
+	}
+	else {
+		return bytes >> 4;
+	}
+}

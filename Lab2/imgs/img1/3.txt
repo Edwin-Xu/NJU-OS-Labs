@@ -1,0 +1,555 @@
+`this is my review file of big data mining`
+# 第一章·大数据导论
+
+大数据概念：传统的数据库工具难以捕获、存储、管理、分析的数据
+
+特点：
+
+4+1V:
+
++ Volume 大量：规模大，可从TB到PB甚至EB级别
++ velocity高速：数据增长快速，处理也快速，时效性要求高
++ veracity真实：来源生活，
++ variety多样：来源和种类多样，有一定准确性，可依赖
++ Value 价值：价值密度低，但是价值高，有深度价值，也能带来巨大商业价值
+
+* 多样：variety-vary-various-variety
+* 大量：volume（体积）
+* 两个ve__city:
+	*  velocity高速
+	*  vearcity真实
+
+- 大量高速 真实多样
+
+
+### 数据挖掘
+#### 概念：
+给定大量数据的情况下，发现具有以下特征的模型：
+
+- 有效性
+- 可用性
+- 出乎意料
+- 可理解性
+
+（有效可用，出乎意料又可理解）
+
+
+数据挖掘的三个方面：
+
+- 挑战C：QUCSS
+	- Q:quality
+	- U:usage
+	- C:context
+	- S:Streaming
+	- S:Scalility
+- 操作O:PRRMVC
+	- P:Prepare
+	- R:Represent
+	- R:Reason
+	- M:Model
+	- V:Visualize
+	- C:Collect------------Collect收集
+- 数据形态DS:MNSOS
+	- M:Multimedia
+	- N:Network
+	- S:Structured
+	- O:Ontologies
+	- S:Signals
+
+
+# 第二章	大数据平台
+
+- MapReduce——PB级别
+- RDBMS只能处理结构化数据，而MapReduce可用处理非结构化、半结构化数据
+- 传统RDBMS采用B树，适合更新小部分数据
+- MapReduce适合批处理(批量处理吧)
+
+
+Hadoop生态圈：
++ HDFS：分布式文件系统
++ HBASE：分布式列存储数据库
++ MapReduce：分布式数据处理和执行环境
++ Hive：基于Hadoop的数据仓库
++ Pig:数据流语言和运行环境，用于检索大数据集
+
+
+## MapReduce详解
+思想：分而治之
+
+4部分：
++ Client
++ JobTracker--TaskScheduler
++ TaskTracker
++ Task：MapTask、ReduceTask
+
+- Map:任务split 
+- Reduce：结果汇总
+
+- map任务数量=split数量
+- reduce数量不定<map任务数量
+- 每个map任务分配一个缓存，默认100MB
+
+
+
+### mapreduce流程：
+input-> map -> sort -> combine -> pratiation -> reduce -> output
+
+imscpro
+
+
+#Hadoop
+分布式处理数据特征：
+- 分布式
+- 计算随数据走
+- 串行io取代随机io：传输时间<<寻到时间
+
+适应环境：
+- 大规模数据
+- 流式数据：写一次读多次
+
+
+不适合：
+- 低延时数据访问
+- 大量小文件
+- 频繁修改文件
+
+Hadoop架构：
++ MapReduce 分布式计算
++ YARN分布式资源管理
++ HDFS分布式存储
+
+
+三种换件搭建/三种模式：
+- 本地模式：不具备HDFS功能，只能测试MapReduce程序
+  ，只有HMaster ，没有Hregionserver
+- 伪分布式：具备HBase的所有功能
+- 全分布式：至少三台机器以上，原因：主从架构
+
+
+三种资源调度器：
+
+- FIFO
+- Capacity Scheduler：容器调度。分为多个队列，每一个队列分配一定资源，每个队列采用FIFO
+- Fair Scheduler：公平调度。多队列多用户，每个队列中的资源量可以配置，同一队列中的作业公平共享队列中所有资源。
+
+Hadoop1.0默认调度器是 FIFO
+
+
+secondary Namenode:
+1. 合并和保存元数据、editLog、FSImage
+2. 不是备用或备份的NameNode
+
+NameNode:
+1. 文件系统管理者
+2. 存储文件系统的metadata
+3. 负责命名空间
+4. 集群配置信息
+5. 存储块复制
+
+DataNode：
+1. 文件存储的基本单元
+2. 存储文件块
+3. 周期性向NameNode报告文件块信息
+
+
+
+#### hadoop优点：
+1. 高效
+2. 廉价
+3. 支持多语言
+4. 运行在Linux
+5. 可靠
+
+
+
+###HDFS vs GFS
+#### GFS
+Google File Sys
+
+一个GFS集群有一个master和大量的chunkserver(块服务器)组成，被许多client访问
+
+文件被划分为固定的块，由主服务器安排存放到块服务器的本地硬盘上
+
+client只从master获取文件的地址，然后直接和clunk交互
+
+chunk default size = 64MB
+
+
+
+
+
+## HBASE
+1. 以Google的BigTable为模型，用java编写
+2. 基于HDFS
+3. 存储大量稀疏数据
+4. 容错性良好
+5. 基于列族
+
+- 分布式、非结构化、稀疏的、面向列、基于HDFS
+- 继承高可靠性、高性能、可伸缩性
+
+
+- 一个或多个主节点：Hmaster
+- 多个从节点：HregionServer
+- HBASE依赖项：zookeeper
+
+特点：
+
+- 面向列族
+- 数据类型只能是bytes
+- 索引只支持row-key
+- cell: 由{row key, cloumnFaily, version}唯一确定的单元，其中的数据没有类型，全是字节码形式
+
+构成：
+
+- Client:
+	- 和Hmaster进行管理类操作
+	- 和Hregionserver进行数据读写操作
+- Zookeeper：
+	- 存储-ROOT-表地址、HMaster地址
+	- Hmaster通过其感知Hregionserver情况
+	- 避免Hmaster单点问题
+- HMaster：
+	- 负责Table和Region的管理
+	- 可以有多个，但是只有一个在运行
+- HregionServer：
+	- 响应用户IO请求，向HDFS文件系统中读写	
+	- HRegionServer管理一系列HRegion对象；每个HRegion对应Table中一个Region，HRegion由多个HStore组成；每个HStore对应Table中一个Column Family的存储；Column Family就是一个集中的存储单元，故将具有相同IO特性的Column放在一个Column Family会更高效。
+
+查询流程：
+
+1. client访问zk，查找-ROOT-表，获取.META.表信息
+2. 从.META.表查找，获取存放数据的region信息（找到region sever）
+3. 最后通过RegionServer获取查找的数据
+
+site：
+`https://www.cnblogs.com/swordfall/p/8737328.html`
+
+
+几个组件：
+- .META.:记录**用户表**的Region信息，可以有多个Region
+- -ROOT-：纪录**.META.表**的Region信息，**只有一个region**
+- Zookeeper：纪录-ROOT-表的location
+- 
+
+
+
+## 数据降维
+
+1.	发现隐藏的联系和主题
+2.	移除相似和噪音特征
+3.	数据解释和可视化
+4.	更容易处理和存储
+
+
+
+计算题：
+pageRank
+SVD奇异值分解
+
+
+
+简答题：特点（HDFS、HBASE、HIVe、MAPREDUCE···）
+
+如：
+- HBASE特点：
+	- 列式存储
+	- 表数据是稀疏的多维映射表
+	- 读写的严格一致性
+	- 提供很高的数据读写速度
+	- 良好的线性可扩展性
+	- 提供海量数据
+	- 数据自动分片
+	- 对于数据故障，有自动的失效检测和恢复能力
+	- 提供了方便的与HDFS和MapReduce集成的能力
+
+
+
+## 硬聚类和软聚类
+- 硬聚类：一个样本/对象只能隶属于一个具体的类。使用广泛，容易实现
+- 软聚类：一个样本/对象可以属于不止一个类，
+
+
+##### 几种聚类：
+-	Partitioning 分区：k-means
+-	Hierarchical分层
+-	Model-based基于模型
+-	Density-based基于密度
+
+##### k-means的优缺点：
+- 优点： 
+	- 高效：O(tkn)
+	- 通常在局部最优处停止
+- 缺点：
+	- 只有定义了平均值才可用
+	- 需要指定聚类的数量K
+	- 噪声和异常值影响
+	- 不适合发现非凸形状的聚类
+
+
+分层聚类方法：
+- 凝聚-自底向上：每次连接两个距离最近的聚类
+- 分裂-自顶向下：每次分裂一个聚类为2个
+
+分层聚类的关键操作：
+- 重复组合两个最近的集群
+
+
+##### 最近邻簇对的4个定义：
+- 单链single-link
+- 完整链complete-link
+- 形心：centroid
+- 平均链：average-link
+
+
+##### 推荐系统三大问题：
+- 收集已经知道的评级
+- 从已知评级中推断未知评级
+- 评估外推法性能
+
+在收集评级中：
+- explicit显式的：让人们打分
+- implicit隐式的：从用户行为中学习——购买意味着高评级
+
+
+
+##### 推荐系统Content-Base基于内容的实现优缺点：
+CB的过程一般包括以下三步：
+
+1. Item Representation：为每个item抽取出一些特征（也就是item的content了）来表示此item；
+2. Profile Learning：利用一个用户过去喜欢（及不喜欢）的item的特征数据，来学习出此用户的喜好特征（profile）；
+3. Recommendation Generation：通过比较上一步得到的用户profile与候选item的特征，为此用户推荐一组相关性最大的item。
+
+即：
+- 提取item特征
+- 学习用户喜欢的特征
+- 推荐相关度最大的item
+
++ 优点：
+	+ 不需要其他用户数据
+	+ 能够推荐给有独特品味的用户
+	+ 能推荐新的或不流行的内容
+	+ 能够提供解释
+- 缺点：
+	- 难以找到合适特征
+	- 难以给新用户推荐
+	- 过度专门化
+
+##### 推荐系统Collaborative Filitering协同过滤的实现优缺点：
+基于协同过滤的推荐策略的基本思想就是基于大众行为，为每个用户提供个性化的推荐，从而使用户能更快速更准确的发现所需要的信息。
+
+协同过滤一般是在海量的用户中发掘出一小部分和你品位比较类似的，在协同过滤中，这些用户成为邻居，然后根据他们喜欢的其他东西组织成一个排序的目录作为推荐给你
+
++ 优点：
+	+ 适合任意类型的对象
++ 缺点：
+	+ 冷启动：如何给新用户做个性化推荐
+	+ 稀疏性问题：用户评价一般是很稀疏的
+	+ 第一评级：不能给为评级的用户推荐
+	+ 流行偏见：不能给有特殊品味的用户推荐
+
+
+
+## Spark
+#### 弹性分布式数据集RDD
+- 核心数据结构，数据集
+- 内容平铺
+- 分布式存储
+- 支持并行计算
+- 分布是弹性的
+- 只读的
+- 可以缓存在内存中
+- 高可靠性——重复计算得到
+
+5个属性：
+1. 分区列表：记录数据块所在分区位置
+2. 依赖列表：记录当前RDD依赖于其他那些RDD
+3. 计算函数compute
+4. 分区器：可选
+5. 计算各分区时优先的位置列表：可选
+
+对RDD的操作：；
+1. Transformation
+2. Action
+
+#### spark特点：
+- 快：比Hadoop快很多
+- 易用：多种语言如Scala
+- 功能强大
+- 通用
+
+#### 功能：
+- spark SQL
+- spark streaming
+- spark GraphX
+- spark mLlib
+
+#### 集群管理框架
+- standalone mode
+- apache mesos
+- hadoop yarn
+- ec2
+
+#### 存储方式：
+- HDFS
+- Hbase
+- MongoDB
+- Cassendra:基于列的分布式数据库
+
+
+#### Spark原理
+- spark提交应用程序
+- Driver程序
+	- 入口程序：driver
+	- 应用的部署模式：
+		- 集群模式
+		- 客户端模式
+- SparkContext对象
+	- 功能：使应用程序能够和集群进行沟通
+	- 每个driver都有一个SC对象
+	- 程序启动时SC高数集群管理器在worker Node上创建执行器
+	- 程序代码会发送到对应的Worker Node上
+	- SC分发任务Task到各个执行器
+
+## 考点：数据处理的三个目标：
+1. **对历史数据的低延迟查询**
+2. **第延迟查询实时数据**
+3. **先进的数据处理技术**
+
+
+## NoSQL
+Not Only SQL
+
+与关系数据库相比，NoSQL数据库具有更强的**可伸缩性和更好的性能**，它们的数据模型解决了关系模型设计时没有解决的几个问题:
+- 地理上的分布式架构
+- 结构化、半结构化、非结构化数据
+- 敏捷sprint、快速模式迭代和频繁的代码推送
+- 支持面向对象编程
+
+
+NoSQL数据类型：
+- 图
+- 文档
+- key-value
+- wide-column
+
+优缺点：
+
+优点：
+- 高可扩展性
+- 读写速度快，效率高
+- 低廉的成本
+
+缺点：
+- 不提供对SQL的支持
+- 支持的特性不够丰富
+- 现有的产品不够成熟
+
+
+
+
+## Neo4j
+最受欢迎的图数据库，面向Graph
+
+将结构化数据存储在网络上而不是表中。
+
+是嵌入式的基于磁盘的、具备完全事物特性的java持久化引擎
+
+特点：
+- 嵌入式
+- 高性能
+- 轻量级
+
+Architecture：
+
+
+## 社交媒体的新特点：
+- 多对多 
++ 每个人可以是媒体的出口/对象/outlet
++ 通讯障碍消失
++ 丰富的用户交互
++ 用户生成内容
++ 用户丰富内容
++ 用户来发的小部件
++ 协作环境
++ 集体智慧
++ 长尾效应
+
+
+## 社交网络：
+一个由节点(个人或组织)组成的社会结构，这些节点通过各种相互依存关系(如友谊、亲属关系等)相互联
+
+
+## 社会计算：
+社会计算是研究基于计算系统的社会行为和社会环境。
+
+数据挖掘相关任务：
+- 中心分析
+- 社区检测
+- 分类
+- 链接预测
+- 病毒式营销
+- 网络建模
+
+
+
+
+## 分类·KNN算法
+k-NearestNeighbor
+
+k最近邻算法——k个最近的邻居 
+
+核心思想：如果一个样本在特征空间中的K最最相邻的样本中属于一个类别，那个这个样本也属于这个类别
+
+算法描述：
+1. 设K是最近邻数目，D是训练样例集合
+2. 对于每一个测试样本z =(x',y'),计算z和D中每一个训练样例(x,y)的距离d
+3. 选择离z最近的K个训练样例的集合Dz
+4. 样例z的类别为Dz中出现次数最多的样本
+
+优点：
+1. 简单，易理解，易实现，无需参数估计，无需训练
+2. 适合对稀有事件分类
+3. 适合多分类问题（对象具有多个类别标签）
+
+缺点：
+1. 计算量较大
+2. 可理解性差
+3. 不适合不平衡的样本
+
+
+
+
+
+
+
+## 考题模拟：
+请谈谈Hadoop系统的组成和工作原理
+
+### MapReduce
+MapReduce并行计算框架是一个分布式计算平台和执行环境，是一个并行化程序执行系统，提供包含Map和reduce两阶段的并行处理处理模型和过程，提供一个并行化编程模型和接口，让程序员可以编写出大数据并行处理程序。具体执行过程是input-map-sort-combine-pratation-reduce-output. 以键值对形式输入数据，系统自动划分和调度，同时自动进行资源分配、调度程序、监视状态、同步等。
+
+
+### HDFS
+Hadoop distributed file system，是一个类似于Google GFS的开源分布式文件系统，提供一个可扩展、高可靠、高可用的大规模数据分布式存储管理系统，将数据分布式存储在大量的廉价服务器上，为上层应用程序提供了一个逻辑上成为整体的大规模数据存储文件系统。与 GFS 类似， HDFS 采用多副本（默认为 3 个副本）数据冗余存储机制，并提供了有效的数据出错检测和数据恢复机制， 大大提高了数据存储的可靠性。
+
+
+### HBASE
+分布式数据库管理系统。 为了克服 HDFS 难以管理结构化/半结构化海量数据的缺点，Hadoop 提供了一个大规模分布式数据库管理和查询系统 HBase。 HBase 是一个建立在 HDFS 之上的分布式数据库，它是一个分布式可扩展的 NoSQL 数据库，提供了对结化、半结构化甚至非结构化大数据的实时读写和随机访问能力。 HBase 提供了一个基于行、列和时间戳的三维数据管理模型， HBase 中每张表的记录数（行数）可以多达几十亿条甚至更多，每条记录可以拥有多达上百万的字段。
+
+
+### Hive 分布式数据仓库管理工具
+Hive 是一个建立在 Hadoop 之上的数据仓库，用于管理存储于 HDFS 或 HBase 中的结构化/半结构化数据。它最早由 Facebook 开发并用于处理并分析大量的用户及日志数据， 2008 年 Facebook将其贡献给 Apache 成为 Hadoop 开源项目。为了便于熟悉 SQL 的传统数据库使用者使用 Hadoop系统进行数据查询分析， Hive 允许直接用类似 SQL 的 HiveQL 查询语言作为编程接口编写数据查询分析程序，并提供数据仓库所需要的数据抽取转换、存储管理和查询分析功能，而 HiveQL 语句在底层实现时被转换为相应的 MapReduce 程序加以执行。
+
+### Common：公共服务模块
+Common 是一套为整个 Hadoop 系统**提供底层支撑服务**和**常用工具的类库**和 **API 编程接口**，这些底层服务包括 Hadoop **抽象文件系统 FileSystem**、**远程过程调用 RPC**、**系统配置工具 Configuration**以及**序列化机制**。在 0.20 及以前的版本中， Common 包含 HDFS、 MapReduce 和其他公共的项目内容；从 0.21 版本开始， HDFS 和 MapReduce 被分离为独立的子项目，其余部分内容构成Hadoop
+
+
+### Zookeeper 分布式协调服务框架
+用于**解决分布式环境中的一致性问题**。 Zookeeper主要用于提供分布式应用中经常需要的**系统可靠性维护**、**数据状态同步**、**统一命名服务**、**分布式应用配置项管理**等功能。 Zookeeper 可用来在分布式环境下维护系统运行管理中的一些数据量不大的重要状态数据，并提供监测数据状态变化的机制，以此配合其他 Hadoop 子系统（如 HBase、Hama 等）或者用户开发的应用系统，解决分布式环境下系统可靠性管理和数据状态维护等问题。
+
+
+
+
+
+

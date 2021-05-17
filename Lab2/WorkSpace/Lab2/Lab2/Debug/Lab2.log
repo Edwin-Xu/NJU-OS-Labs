@@ -1,0 +1,23 @@
+﻿  Microsoft (R) C/C++ Optimizing Compiler Version 19.15.26726 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /ZI /JMC /W3 /WX- /diagnostics:classic /sdl /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /permissive- /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:prompt Edwin.cpp
+  
+  Edwin.cpp
+d:\大学\大三\上\计算机操作系统\labs\lab2\workspace\lab2\lab2\directory.h(85): warning C4018: '<': signed/unsigned mismatch
+d:\大学\大三\上\计算机操作系统\labs\lab2\workspace\lab2\lab2\edwin.cpp(11): warning C4081: expected 'newline'; found ';'
+d:\大学\大三\上\计算机操作系统\labs\lab2\workspace\lab2\lab2\edwin.cpp(201): warning C4018: '<': signed/unsigned mismatch
+d:\大学\大三\上\计算机操作系统\labs\lab2\workspace\lab2\lab2\edwin.cpp(214): warning C4101: 'temp': unreferenced local variable
+d:\大学\大三\上\计算机操作系统\labs\lab2\workspace\lab2\lab2\edwin.cpp(230): warning C4018: '<': signed/unsigned mismatch
+d:\大学\大三\上\计算机操作系统\labs\lab2\workspace\lab2\lab2\edwin.cpp(234): warning C4018: '<': signed/unsigned mismatch
+d:\大学\大三\上\计算机操作系统\labs\lab2\workspace\lab2\lab2\edwin.cpp(285): warning C4018: '<': signed/unsigned mismatch
+d:\大学\大三\上\计算机操作系统\labs\lab2\workspace\lab2\lab2\edwin.cpp(565): warning C4553: '==': result of expression not used; did you intend '='?
+d:\大学\大三\上\计算机操作系统\labs\lab2\workspace\lab2\lab2\edwin.cpp(484): warning C4101: 'i': unreferenced local variable
+  Microsoft (R) Incremental Linker Version 14.15.26726.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  "/OUT:D:\大学\大三\上\计算机操作系统\Labs\Lab2\WorkSpace\Lab2\Debug\Lab2.exe" /INCREMENTAL kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST "/MANIFESTUAC:level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK "/PDB:D:\大学\大三\上\计算机操作系统\Labs\Lab2\WorkSpace\Lab2\Debug\Lab2.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT "/IMPLIB:D:\大学\大三\上\计算机操作系统\Labs\Lab2\WorkSpace\Lab2\Debug\Lab2.lib" /MACHINE:X86 Debug\BackUp.obj 
+  Debug\Edwin.obj 
+  Debug\Main.obj 
+  Debug\Mine.obj 
+  Lab2.vcxproj -> D:\大学\大三\上\计算机操作系统\Labs\Lab2\WorkSpace\Lab2\Debug\Lab2.exe
